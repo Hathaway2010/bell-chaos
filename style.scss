@@ -1,0 +1,105 @@
+$title-fonts: Courgette, sans-serif;
+$body-fonts: "Open Sans", sans-serif;
+$gold: #FFCC33;
+$dark: #381c01;
+$light: #f9f0ff;
+body{
+  background-color: $light;
+  
+header {
+  color: $gold;
+  font-family: $title-fonts;
+  font-size: 40px;
+  text-shadow: 2px 2px 5px black;
+  box-shadow: 2px 2px 5px $dark;
+  text-align: center;
+  background-color: $dark;
+}
+  main {
+  font-family: $body-fonts;
+  
+  #row {
+    display: flex;
+    justify-content: space-around;
+    align-content: center;
+  
+    #bell-box {
+      display: grid;
+      background-color: $gold;
+      box-shadow: 0px 0px 5px $dark;
+      width: 250px;
+      height: 250px;
+      grid-template-columns: 1fr 1fr 1fr;
+      grid-template-rows: 1fr 1fr 1fr;
+      padding: 15px;
+      border-radius: 10px;
+    button {
+      background-color: $gold;
+      background-image: url("https://upload.wikimedia.org/wikipedia/commons/9/9c/Glasgow_deid_bell.jpg");
+      background-size: cover;
+      color: $gold;
+      text-shadow: 2px 2px 2px $dark;
+      width: 60px;
+      height: 60px;
+      border: none;
+      border-radius: 50%;
+      box-shadow: 0px 0px 5px $dark;
+      margin: 10px;
+      font-size: 20px;
+    }
+    }
+    #quote {
+      font-family: $title-fonts;
+      font-size: 25px;
+      white-space: pre-wrap;
+      text-align: left;
+      color: $dark;
+      #author {
+        font-family: $body-fonts;
+      }
+    }
+    #display {
+      height: 250px;
+      width: 200px;
+      padding: 15px;
+      z-index: 1;
+      background-image: url("https://upload.wikimedia.org/wikipedia/commons/9/9c/Glasgow_deid_bell.jpg");
+      background-size: cover;
+      background-color: white;
+      box-shadow: 0px 0px 5px $dark;
+      text-align: right;
+      border-radius: 10px;
+      color: $gold;
+
+      h2 {
+        font-family: $title-fonts;
+        font-size: 20px;
+        text-align: left;
+      }
+      #sound-name {
+        font-size: 40px;
+        color: $gold;
+        text-align: center;
+        text-shadow: 2px 2px 2px $dark;
+      }
+    }
+      .license {
+        border-radius: 5px;
+        background-color: $gold;
+        box-shadow: 0px 0px 2px $dark;
+        font-size: 10px;
+        line-height: 10px;
+        padding: 10px;
+        margin-top: 10px;
+        color: $dark;
+      a {
+        color: $dark;
+        text-decoration: none;
+        font-weight: bold;
+        font-size: 11px;
+      }
+    
+    }
+  }
+}
+  }

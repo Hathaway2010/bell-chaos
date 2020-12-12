@@ -1,0 +1,96 @@
+{/*function DrumSet(props) {
+  let drumPads = props.pads.map((pad) =>
+    { return (
+      <button class="drum-pad" id={pad[1]}>
+        <audio src={pad[2]} />
+        <p>{pad[0]}</p>
+      </button>
+     )
+         
+  })
+  return (
+      <div>
+      <p> {drumPads} </p>
+      </div>
+           )  
+  }
+*/}
+const QUOTE="\tTo the swinging and the ringing\n\t\tOf the bells, bells, bells,\n\t       Of the bells, bells, bells, bells,\n\t\t      Bells, bells, bells—\nTo the rhyming and the chiming of the bells!"
+const PADS = [['Q', 'ting', 'http://soundbible.com/grab.php?id=1628&type=mp3', 'Ting', 'Popup Pixels', 'https://creativecommons.org/licenses/by/3.0/'], 
+              ['W', 'beep-ping', 'http://soundbible.com/grab.php?id=1133&type=mp3', 'Beep Ping', 'Mike Koenig', 'https://creativecommons.org/licenses/by/3.0/'], 
+              ['E', 'indian-bell', 'http://soundbible.com/grab.php?id=1690&type=mp3', 'Indian Bell', 'Flemur', 'https://creativecommons.org/licenses/sampling+/1.0/'], 
+              ['A', 'temple-bell-small', 'http://soundbible.com/grab.php?id=1496&type=mp3', 'Japanese Temple Bell (Small)', 'Mike Koenig', 'https://creativecommons.org/licenses/by/3.0/'], 
+              ['S', 'frying-pan-hit', 'http://soundbible.com/grab.php?id=1004&type=mp3', 'Frying Pan Hit', 'Mike Koenig', 'https://creativecommons.org/licenses/by/3.0/'],
+              ['D', 'frying-pan-impact', 'http://soundbible.com/grab.php?id=1005&type=mp3','Frying Pan Impact', 'Mike Koenig', 'https://creativecommons.org/licenses/by/3.0/'], 
+              ['Z', 'temple-bell', 'http://soundbible.com/grab.php?id=1531&type=mp3', 'Temple Bell', 'Mike Koenig', 'https://creativecommons.org/licenses/by/3.0/'], 
+              ['X', 'temple-bell-huge', 'http://soundbible.com/grab.php?id=1506&type=mp3', 'Temple Bell (Huge)', 'Mike Koenig', 'https://creativecommons.org/licenses/by/3.0/'], 
+              ['C', 'chinese-gong', 'http://soundbible.com/grab.php?id=2148&type=mp3', 'Chinese Gong', 'Daniel Simon', 'https://creativecommons.org/licenses/by/3.0/']]
+
+function Display(props) {
+  return (
+    <div>
+    <div id="display">
+      <h2>What you're hearing:</h2>
+      <p id="sound-name">{props.pad[3]}</p>
+         </div>
+            <div class="license">
+      <p>Sound created by: {props.pad[4]}</p>
+        <p>Licensed under <a href={props.pad[5]}>Creative Commons</a></p>
+      </div>
+    </div>
+  )
+}
+
+function DrumPad(props) {
+  return (
+  <button value={props.pad[0]} class="drum-pad" id={props.pad[1]} onClick={props.onClick}>
+    <audio src={props.pad[2]} class="clip" id={props.pad[0]} />
+    <p>{props.pad[0]}</p>
+  </button>
+  );
+}
+
+class Coordinate extends React.Component {
+  constructor(props) {
+    super(props);
+  this.state={input: 0, pads: PADS}
+  this.handleLetter = this.handleLetter.bind(this);
+  this.handleClick = this.handleClick.bind(this);
+  }
+  handleLetter(event) {
+    let pressed = String.fromCharCode(event.which).toUpperCase();
+    let padPressed = this.state.pads.filter(pad => pad[0] == pressed);
+    let padId = padPressed[0][1]
+    document.getElementById(padId).click();
+   
+  }
+  handleClick(event) {
+    document.getElementById(`${event.target.value}`).play();
+    let padPressed = this.state.pads.filter(pad => pad[0] == event.target.value);
+    let newInput = this.state.pads.indexOf(...padPressed);
+    this.setState({input: newInput})    
+    
+  }
+  
+  render () {
+    let padList = this.state.pads.map(pad => <DrumPad key={pad[0]} onClick={this.handleClick} id={pad[1]} value={pad[0]} class="drum-pad" pad={pad}/>)
+    
+    return (
+      <div onKeyPress={this.handleLetter}>
+        <div id="row">
+          <div id="bell-box">                 
+            {padList}
+           </div>
+         <div id="quote">           
+           {QUOTE}
+           <p id="author">&tilde; by Edgar Allen Poe</p>
+          </div>
+         <Display pad={this.state.pads[this.state.input]}/>
+         
+        </div>
+      </div>
+     )
+  }
+}
+
+ReactDOM.render(<Coordinate />, document.getElementById("drum-machine"));
